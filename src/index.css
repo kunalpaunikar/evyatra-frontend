@@ -1,29 +1,45 @@
 @import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
 
+* {
+    box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Mobile responsive */
+@media (max-width: 600px) {
+    h1 { font-size: 1.5rem !important; }
+    h2 { font-size: 1.2rem !important; }
+    h3 { font-size: 1rem !important; }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 0.5rem !important;
+    }
 }
 
-/* Hide browser-native password reveal icon when using a custom toggle button */
-input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear {
-  display: none;
+/* Print receipt */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-input[type="password"]::-webkit-textfield-decoration-container,
-input[type="password"]::-webkit-textfield-decoration-button,
-input[type="password"]::-webkit-credentials-auto-fill-button {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
+@keyframes progress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+@media print {
+    body * { visibility: hidden; }
+    #receipt, #receipt * { visibility: visible; }
+    #receipt { position: absolute; left: 0; top: 0; }
 }

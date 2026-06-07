@@ -15,11 +15,6 @@ function PaymentModal({ booking, onClose, onSuccess }) {
     const upiString = `upi://pay?pa=evyatra@upi&pn=EVyatra&am=${booking.totalAmount}&cu=INR&tn=EV Charging Booking ${booking.bookingId}`;
 
     const handlePayment = async () => {
-        if (!upiId && paymentMethod === 'UPI') {
-            setError('UPI ID daalo!');
-            return;
-        }
-
         setProcessing(true);
         setStep(3); // Processing screen
 

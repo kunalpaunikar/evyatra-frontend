@@ -1,8 +1,19 @@
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function LandingPage() {
 
     const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const features = [
         {
@@ -76,34 +87,71 @@ function LandingPage() {
 
             {/* NAVBAR */}
 
-            <nav style={styles.navbar}>
+            <nav style={{
+                ...styles.navbar,
+                padding: isMobile ? '1rem 1.5rem' : '1rem 4rem',
+            }}>
 
                 <div style={styles.logoBox}>
                     <span style={styles.logoIcon}>⚡</span>
-                    <span style={styles.logoText}>EVyatra</span>
+                    <span style={{...styles.logoText, fontSize: isMobile ? '1.4rem' : '1.8rem'}}>EVyatra</span>
                 </div>
 
-                <div style={styles.navLinks}>
-                    <a href="#features" style={styles.navLink}>Features</a>
-                    <a href="#how" style={styles.navLink}>How it Works</a>
-                    <a href="#reviews" style={styles.navLink}>Reviews</a>
+                {/* Desktop Menu — hidden on mobile */}
+                {!isMobile && (
+                    <div style={styles.navLinks}>
+                        <a href="#features" style={styles.navLink}>Features</a>
+                        <a href="#how" style={styles.navLink}>How it Works</a>
+                        <a href="#reviews" style={styles.navLink}>Reviews</a>
 
+                        <button
+                            style={styles.loginBtn}
+                            onClick={() => navigate('/login')}
+                        >
+                            Login
+                        </button>
+
+                        <button
+                            style={styles.signupBtn}
+                            onClick={() => navigate('/register')}
+                        >
+                            Get Started
+                        </button>
+                    </div>
+                )}
+
+                {/* Mobile Hamburger Menu — visible only on mobile */}
+                {isMobile && (
+                    <button 
+                        style={styles.hamburger}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >
+                        ☰
+                    </button>
+                )}
+
+            </nav>
+
+            {/* Mobile Menu — appears below navbar when open */}
+            {isMobile && menuOpen && (
+                <div style={styles.mobileMenu}>
+                    <a href="#features" style={styles.mobileLink} onClick={() => setMenuOpen(false)}>Features</a>
+                    <a href="#how" style={styles.mobileLink} onClick={() => setMenuOpen(false)}>How it Works</a>
+                    <a href="#reviews" style={styles.mobileLink} onClick={() => setMenuOpen(false)}>Reviews</a>
                     <button
-                        style={styles.loginBtn}
-                        onClick={() => navigate('/login')}
+                        style={styles.mobileLoginBtn}
+                        onClick={() => { navigate('/login'); setMenuOpen(false); }}
                     >
                         Login
                     </button>
-
                     <button
-                        style={styles.signupBtn}
-                        onClick={() => navigate('/register')}
+                        style={styles.mobileSignupBtn}
+                        onClick={() => { navigate('/register'); setMenuOpen(false); }}
                     >
                         Get Started
                     </button>
                 </div>
-
-            </nav>
+            )}
 
             {/* HERO SECTION */}
 
@@ -730,6 +778,60 @@ const styles = {
     footerCopy: {
         marginTop: '1rem',
         color: '#666',
+    },
+
+    // Mobile Menu Styles
+    hamburger: {
+        display: 'block',
+        background: 'transparent',
+        border: 'none',
+        color: 'white',
+        fontSize: '1.8rem',
+        cursor: 'pointer',
+        padding: '0.5rem',
+    },
+
+    mobileMenu: {
+        position: 'fixed',
+        top: '70px',
+        left: 0,
+        right: 0,
+        background: 'rgba(0,0,0,0.95)',
+        backdropFilter: 'blur(10px)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        padding: '1.5rem 2rem',
+        zIndex: 998,
+    },
+
+    mobileLink: {
+        color: 'white',
+        textDecoration: 'none',
+        fontWeight: '500',
+        padding: '0.7rem 0',
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
+    },
+
+    mobileLoginBtn: {
+        padding: '0.7rem 1.5rem',
+        borderRadius: '8px',
+        border: '1px solid white',
+        background: 'transparent',
+        color: 'white',
+        cursor: 'pointer',
+        fontWeight: 'bold',
+        marginTop: '0.5rem',
+    },
+
+    mobileSignupBtn: {
+        padding: '0.7rem 1.5rem',
+        borderRadius: '8px',
+        border: 'none',
+        background: '#00c853',
+        color: 'white',
+        fontWeight: 'bold',
+        cursor: 'pointer',
     },
 
 };
