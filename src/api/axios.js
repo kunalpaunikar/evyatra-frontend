@@ -4,7 +4,8 @@ import axios from 'axios';
 
 // Base URL — This will be automatically applied to every API call.
 const API = axios.create({
-    baseURL: 'http://localhost:8080/api',
+    baseURL: process.env.REACT_APP_API_URL
+        || 'http://localhost:8080/api',
 });
 
 // Automatically add the JWT token to every request
