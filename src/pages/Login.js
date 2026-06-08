@@ -23,15 +23,15 @@ function Login() {
 
         const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
         if (!form.email) {
-            newErrors.email = 'Email required hai';
+            newErrors.email = 'Email is required';
         } else if (!emailRegex.test(form.email)) {
-            newErrors.email = 'Sirf @gmail.com email allowed hai';
+            newErrors.email = 'Only @gmail.com email is allowed';
         }
 
         if (!form.password) {
-            newErrors.password = 'Password required hai';
+            newErrors.password = 'Password is required';
         } else if (form.password.length < 8 || form.password.length > 12) {
-            newErrors.password = 'Password 8-12 characters ka hona chahiye';
+            newErrors.password = 'Password must be 8-12 characters long';
         }
 
         return newErrors;
@@ -83,7 +83,7 @@ function Login() {
                             value={form.email}
                             onChange={handleChange}
                             style={errors.email ? styles.inputError : styles.input}
-                            placeholder="Email daalo"
+                            placeholder="Enter your email"
                         />
                         {errors.email && <span style={styles.fieldError}>{errors.email}</span>}
                     </div>
@@ -97,7 +97,7 @@ function Login() {
                                 value={form.password}
                                 onChange={handleChange}
                                 style={errors.password ? styles.inputError : styles.inputPass}
-                                placeholder="Password daalo"
+                                placeholder="Enter your password"
                             />
                             <button
                                 type="button"

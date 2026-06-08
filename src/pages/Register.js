@@ -37,18 +37,18 @@ function Register() {
         // Email — sirf @gmail.com
         const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
         if (!form.email) {
-            newErrors.email = 'Email required hai';
+            newErrors.email = 'Email is required';
         } else if (!emailRegex.test(form.email)) {
             newErrors.email = 'Only @gmail.com email is allowed';
         }
 
-        // Password — 8-12 chars, ek number, ek letter, ek special char
+        // Password — 8-12 chars, include a number, a letter, and a special char
         const passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@*_#$!])[A-Za-z\d@*_#$!]{8,12}$/;
 
         if (!form.password) {
             newErrors.password = 'Password is required';
         } else if (!passRegex.test(form.password)) {
-            newErrors.password = 'Password 8-12 chars, ek number + ek letter + ek special char (@*_#$!) hona chahiye';
+            newErrors.password = 'Password must be 8-12 chars and include a number, a letter, and a special character (@*_#$!)';
         }
 
         // Phone — 10 digits only
@@ -104,7 +104,7 @@ function Register() {
                             value={form.name}
                             onChange={handleChange}
                             style={errors.name ? styles.inputError : styles.input}
-                            placeholder="Apna naam daalo"
+                            placeholder="Enter your full name"
                         />
                         {errors.name && <span style={styles.fieldError}>{errors.name}</span>}
                     </div>
