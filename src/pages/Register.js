@@ -66,7 +66,7 @@ function Register() {
         e.preventDefault();
         setApiError('');
 
-        // Validate karo
+        // Validate the form
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
@@ -76,7 +76,7 @@ function Register() {
         setLoading(true);
         try {
             await API.post('/auth/register', form);
-            setSuccess('Registration successful! Login karo.');
+            setSuccess('Registration successful! Please login.');
             setTimeout(() => navigate('/login'), 2000);
         } catch (err) {
             setApiError(err.response?.data?.message || 'Registration failed!');
@@ -125,7 +125,7 @@ function Register() {
 
                     {/* Password */}
                     <div style={styles.field}>
-                        <label>Password (8-12 chars + number + special char)</label>
+                        <label>Password (8-12 chars, include a number and special character)</label>
                         <div style={styles.passwordWrapper}>
                             <input
                                 type={showPassword ? 'text' : 'password'}
@@ -133,7 +133,7 @@ function Register() {
                                 value={form.password}
                                 onChange={handleChange}
                                 style={errors.password ? styles.inputError : styles.inputPass}
-                                placeholder="Min 8, max 12, ek number"
+                                placeholder="Enter 8-12 chars, include a number and a special character"
                             />
                             <button
                                 type="button"
