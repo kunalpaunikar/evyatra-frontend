@@ -31,7 +31,7 @@ function Register() {
 
         // Name
         if (!form.name.trim()) {
-            newErrors.name = 'Name required hai';
+            newErrors.name = 'Name is require';
         }
 
         // Email — sirf @gmail.com
@@ -171,8 +171,8 @@ function Register() {
                 </form>
 
                 <p style={{ marginTop: '1rem', textAlign: 'center' }}>
-                    Already account hai?{' '}
-                    <Link to="/login">Login karo</Link>
+                Already have an account?{' '}
+                <Link to="/login">Sign In</Link>
                 </p>
             </div>
         </div>
