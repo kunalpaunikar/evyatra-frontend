@@ -64,6 +64,9 @@ npm start
 ### User Profile
 ![User Profile](screenshots/UserProfile.jpeg)
 
+### Reset OTP Mail
+![ResetOTP](screenshots/ResetOTPMail.jpeg)
+
 ### Admin Dashboard
 ![Admin Dashboard](screenshots/AdminDashboard.jpeg)
 

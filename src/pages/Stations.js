@@ -638,7 +638,7 @@ function Stations() {
                                 >
                                     <Popup>
                                         <div style={{ textAlign: 'center' }}>
-                                            <strong>📍 Aap Yahan Ho!</strong><br />
+                                            <strong>📍 You are here !</strong><br />
                                             <small>Your current location</small>
                                         </div>
                                     </Popup>

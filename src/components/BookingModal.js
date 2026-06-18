@@ -123,7 +123,7 @@ function BookingModal({ station, onClose, onSuccess }) {
 
                         {slots.length === 0 ? (
                             <p style={{ color: '#e63946', textAlign: 'center' }}>
-                                😕 No slots available!
+                                No slots available!
                             </p>
                         ) : (
                             <div style={styles.slotsGrid}>
