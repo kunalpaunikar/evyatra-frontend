@@ -162,7 +162,7 @@ function LandingPage() {
                 <div style={styles.heroContent}>
 
                     <div style={styles.heroBadge}>
-                        🇮🇳 INDIA'S SMART EV NETWORK
+                        INDIA'S SMART EV NETWORK
                     </div>
 
                     <h1 style={styles.heroTitle}>
@@ -182,7 +182,7 @@ function LandingPage() {
                             style={styles.primaryBtn}
                             onClick={() => navigate('/register')}
                         >
-                            🚀 Start Charging
+                            Start Charging
                         </button>
 
                         <button
@@ -195,9 +195,9 @@ function LandingPage() {
                     </div>
 
                     <div style={styles.heroTags}>
-                        <span style={styles.tag}>⚡ Fast Charging</span>
-                        <span style={styles.tag}>📍 Live Map</span>
-                        <span style={styles.tag}>🔋 Smart Booking</span>
+                        <span style={styles.tag}>Fast Charging</span>
+                        <span style={styles.tag}>Live Map</span>
+                        <span style={styles.tag}>Smart Booking</span>
                     </div>
 
                 </div>
@@ -361,7 +361,7 @@ function LandingPage() {
             <section style={styles.ctaSection}>
 
                 <h2 style={styles.ctaTitle}>
-                    Ready To Power Your EV Journey? ⚡
+                    Ready to Power Your EV Journey?
                 </h2>
 
                 <p style={styles.ctaSub}>
@@ -372,7 +372,7 @@ function LandingPage() {
                     style={styles.ctaBtn}
                     onClick={() => navigate('/register')}
                 >
-                    🚀 Join EVyatra
+                    Join EVyatra
                 </button>
 
             </section>
@@ -382,7 +382,7 @@ function LandingPage() {
             <footer style={styles.footer}>
 
                 <h2 style={styles.footerLogo}>
-                    ⚡ EVyatra
+                    EVyatra
                 </h2>
 
                 <p style={styles.footerText}>
@@ -390,7 +390,7 @@ function LandingPage() {
                 </p>
 
                 <p style={styles.footerCopy}>
-                    © 2026 EVyatra — Made with ❤️ for Electric India
+                    © 2026 EVyatra — India's Smart EV Charging Network
                 </p>
 
             </footer>

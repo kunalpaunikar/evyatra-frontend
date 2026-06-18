@@ -189,10 +189,10 @@ function PaymentModal({ booking, onClose, onSuccess }) {
 
                         {paymentMethod === 'UPI' && (
                             <div>
-                                <h3 style={styles.sectionTitle}>📱 UPI Payment</h3>
+                                <h3 style={styles.sectionTitle}>UPI Payment</h3>
 
                                 <div style={styles.qrBox}>
-                                    {/* Real QR Code */}
+                                    {/* QR Code for payment */}
                                     <div style={styles.qrWrapper}>
                                         <QRCodeSVG
                                             value={upiString}

@@ -53,14 +53,13 @@ function Login() {
             login(response.data);
             navigate('/dashboard');
         } catch (err) {
-            // Backend se aaya message dikhao
             const msg = err.response?.data?.message;
-            if (msg === 'Password galat hai!') {
-                setApiError('❌ Wrong password! Try Again ... ');
-            } else if (msg === 'User nahi mila!') {
-                setApiError('❌ Email is not registered !');
+            if (msg === 'Password galat hai!' || msg?.includes('password')) {
+                setApiError('Wrong password. Please try again.');
+            } else if (msg === 'User nahi mila!' || msg?.includes('not found')) {
+                setApiError('Email is not registered.');
             } else {
-                setApiError('❌ Login failed! Try again.');
+                setApiError('Login failed. Please try again.');
             }
         } finally {
             setLoading(false);
@@ -72,7 +71,7 @@ function Login() {
             <div style={styles.card}>
                 <h2 style={styles.title}>⚡ EVyatra Login</h2>
 
-                {apiError && <p style={styles.error}>{apiError}</p>}
+                {apiError && <p style={styles.error}>⚠️ {apiError}</p>}
 
                 <form onSubmit={handleSubmit}>
                     <div style={styles.field}>
@@ -126,10 +125,10 @@ function Login() {
 
 
                 <p style={{ textAlign: 'center', marginTop: '0.5rem' }}>
-    <Link to="/forgot-password" style={{ color: '#e63946' }}>
-        🔐 Forgot Password?
-    </Link>
-</p>
+                    <Link to="/forgot-password" style={{ color: '#e63946' }}>
+                        Forgot Password?
+                    </Link>
+                </p>
             </div>
         </div>
     );

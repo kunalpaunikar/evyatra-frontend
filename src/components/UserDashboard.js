@@ -21,7 +21,7 @@ function UserDashboard() {
                 res.data.filter(b => b.status === 'CONFIRMED').length
             );
         } catch (err) {
-            console.error('Bookings load nahi hue!');
+            console.error('Failed to load bookings');
         }
     };
 
@@ -37,7 +37,7 @@ function UserDashboard() {
             {/* Banner */}
             <div style={styles.banner}>
                 <h1 style={styles.bannerTitle}>
-                    ⚡ Welcome, {user?.name}!
+                    Welcome, {user?.name}!
                 </h1>
                 <p style={styles.bannerSub}>
                     Find and book EV charging stations near you
@@ -50,7 +50,7 @@ function UserDashboard() {
                     style={styles.statCard}
                     onClick={() => navigate('/bookings')}
                 >
-                    <span style={styles.icon}>🔋</span>
+                    <span style={styles.icon}>�</span>
                     <h3 style={styles.statLabel}>My Bookings</h3>
                     <p style={styles.statNum}>{bookingCount}</p>
                 </div>
@@ -63,7 +63,7 @@ function UserDashboard() {
                     <p style={styles.statNum}>30+</p>
                 </div>
                 <div style={styles.statCard}>
-                    <span style={styles.icon}>✅</span>
+                    <span style={styles.icon}>✓</span>
                     <h3 style={styles.statLabel}>Confirmed</h3>
                     <p style={styles.statNum}>{confirmedCount}</p>
                 </div>
@@ -71,7 +71,7 @@ function UserDashboard() {
 
             {/* Quick Actions */}
             <div style={styles.section}>
-                <h2 style={styles.sectionTitle}>🚀 Quick Actions</h2>
+                <h2 style={styles.sectionTitle}>Quick Actions</h2>
                 <div style={styles.actionRow}>
                     {actions.map((action, i) => (
                         <div
@@ -90,9 +90,9 @@ function UserDashboard() {
 
             {/* Info */}
             <div style={styles.infoBox}>
-                <p>⚡ <strong>EVyatra</strong> — India ka best EV charging network!</p>
+                <p><strong>EVyatra</strong> — India's leading EV charging network</p>
                 <p style={{ color: '#666', marginTop: '0.5rem' }}>
-                    Stations dhundho, slot book karo, aur charge karo! 🔋
+                    Find stations, book slots, and charge your EV with ease.
                 </p>
             </div>
         </div>

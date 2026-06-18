@@ -23,15 +23,12 @@ function App() {
             <BrowserRouter>
                 <Routes>
 
-                    {/* Landing page — apna Navbar hai */}
                     <Route path="/" element={<LandingPage />} />
 
-                    {/* Auth pages — sirf brand dikhega */}
                     <Route path="/login" element={<><Navbar /><Login /></>} />
                     <Route path="/register" element={<><Navbar /><Register /></>} />
                     <Route path="/forgot-password" element={<><Navbar /><ForgotPassword /></>} />
 
-                    {/* Protected pages — Navbar ke saath */}
                     <Route path="/dashboard" element={
                         <ProtectedRoute>
                             <Navbar />
@@ -47,17 +44,17 @@ function App() {
                     } />
 
                     <Route path="/bookings" element={
-                    <ProtectedRoute>
-                    <Navbar />
-                    <MyBookings />
-                    </ProtectedRoute>
+                        <ProtectedRoute>
+                            <Navbar />
+                            <MyBookings />
+                        </ProtectedRoute>
                     } />
 
                     <Route path="/profile" element={
-                    <ProtectedRoute>
-                    <Navbar />
-                    <MyProfile />
-                    </ProtectedRoute>
+                        <ProtectedRoute>
+                            <Navbar />
+                            <MyProfile />
+                        </ProtectedRoute>
                     } />
 
                 </Routes>

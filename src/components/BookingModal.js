@@ -20,7 +20,7 @@ function BookingModal({ station, onClose, onSuccess }) {
                 const res = await API.get(`/slots/station/${station.id}/available`);
                 setSlots(res.data);
             } catch (err) {
-                setError('Slots not loaded!');
+                setError('Failed to load slots. Please try again.');
             }
         };
 
@@ -40,7 +40,7 @@ function BookingModal({ station, onClose, onSuccess }) {
 
     const handleBooking = async () => {
     if (!selectedSlot || !bookingDate || !startTime || !endTime) {
-        setError('fill in all fields!');
+        setError('Please fill in all fields!');
         return;
     }
     if (startTime >= endTime) {
@@ -68,10 +68,10 @@ function BookingModal({ station, onClose, onSuccess }) {
         setBooking(res.data);
         setStep(2);
     } catch (err) {
-        // Exact error message dikhao
+        // Show exact error message from server
         const msg = err.response?.data?.message
             || err.response?.data
-            || 'Booking failed!';
+            || 'Booking failed. Please try again.';
         setError(msg);
         console.error('Booking error:', err.response?.data);
     } finally {
@@ -91,7 +91,7 @@ function BookingModal({ station, onClose, onSuccess }) {
 
                 {/* Header */}
                 <div style={styles.modalHeader}>
-                    <h2 style={styles.modalTitle}>⚡ {station.name}</h2>
+                    <h2 style={styles.modalTitle}>{station.name}</h2>
                     <button onClick={onClose} style={styles.closeBtn}>✕</button>
                 </div>
 

@@ -21,7 +21,7 @@ function MyProfile() {
                 phone: res.data.phone || '',
             });
         } catch (err) {
-            setMessage('Profile load nahi hua!');
+            setMessage('Failed to load profile. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -31,11 +31,11 @@ function MyProfile() {
         e.preventDefault();
         try {
             await API.put('/user/profile', form);
-            setMessage('✅ Profile update ho gaya!');
+            setMessage('Profile updated successfully!');
             setEditMode(false);
             fetchProfile();
         } catch (err) {
-            setMessage('❌ Update nahi hua!');
+            setMessage('Failed to update profile. Please try again.');
         }
     };
 
@@ -144,11 +144,11 @@ function MyProfile() {
                                     disabled
                                 />
                                 <small style={{ color: '#999' }}>
-                                    Email Should not be change
+                                    Email cannot be changed
                                 </small>
                             </div>
                             <button type="submit" style={styles.saveBtn}>
-                                ✅ Save Changes
+                                Save Changes
                             </button>
                         </form>
                     )}
@@ -156,12 +156,12 @@ function MyProfile() {
 
                 {/* Security Card */}
                 <div style={styles.card}>
-                    <h2 style={styles.cardTitle}>🔐 Security</h2>
+                        <h2 style={styles.cardTitle}>Security</h2>
                     <div style={styles.securityRow}>
                         <div>
                             <p style={styles.secTitle}>Password</p>
                             <p style={styles.secSub}>
-                                Use forgot Password to change 
+                                Use Forgot Password to change your password
                             </p>
                         </div>
                         <a
@@ -175,7 +175,7 @@ function MyProfile() {
 
                 {/* Account Info */}
                 <div style={styles.card}>
-                    <h2 style={styles.cardTitle}>ℹ️ Account Info</h2>
+                    <h2 style={styles.cardTitle}>Account Information</h2>
                     <div style={styles.infoList}>
                         <div style={styles.infoRow}>
                             <span style={styles.infoIcon}>🆔</span>

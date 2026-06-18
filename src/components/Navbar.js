@@ -17,7 +17,7 @@ function Navbar() {
         navigate('/login');
     };
 
-    // Users fetch karo
+    // Fetch users list
     const fetchUsers = async () => {
         if (showUsers) {
             setShowUsers(false);
@@ -29,29 +29,29 @@ function Navbar() {
             setUsers(res.data);
             setShowUsers(true);
         } catch (err) {
-            setMessage('❌ Users not loaded!');
+            setMessage('Failed to load users. Please try again.');
         } finally {
             setLoading(false);
         }
     };
 
-    // User delete karo
+    // Delete user
     const deleteUser = async (id, name) => {
-        if (!window.confirm(`${name} want to delete this ?`)) return;
+        if (!window.confirm(`Are you sure you want to delete ${name}?`)) return;
         try {
             await API.delete(`/admin/users/${id}`);
-            setMessage(`✅ ${name} deleted!`);
+            setMessage(`User ${name} deleted successfully!`);
             setUsers(users.filter(u => u.id !== id));
         } catch (err) {
-            setMessage('❌ Not Deleted!');
+            setMessage('Failed to delete user. Please try again.');
         }
     };
 
-    // Login/Register page pe sirf brand dikhao
+    // Show navbar brand only on login/register pages
     if (location.pathname === '/login' || location.pathname === '/register') {
         return (
             <nav style={styles.nav}>
-                <Link to="/" style={styles.brand}>⚡ EVyatra</Link>
+                <Link to="/" style={styles.brand}>EVyatra</Link>
             </nav>
         );
     }
@@ -60,24 +60,24 @@ function Navbar() {
         <>
             {/* Main Navbar */}
             <nav style={styles.nav}>
-                <Link to="/" style={styles.brand}>⚡ EVyatra</Link>
+                <Link to="/" style={styles.brand}>EVyatra</Link>
 
                 <div style={styles.links}>
-                    {/* Admin Button — only see to Admin */}
+                    {/* Admin section - visible only to admins */}
                     {user?.role === 'ROLE_ADMIN' && (
                         <button
                             onClick={fetchUsers}
                             style={showUsers ? styles.adminBtnActive : styles.adminBtn}
                         >
-                            🛡️ {loading ? 'Loading...' : showUsers ? 'Hide Users' : 'Manage Users'}
+                            {loading ? 'Loading...' : showUsers ? 'Hide Users' : 'Manage Users'}
                         </button>
                     )}
 
                     {user && (
                     <>
-                    <Link to="/stations" style={styles.navLink}>📍 Stations</Link>
-                    <Link to="/bookings" style={styles.navLink}>📅 Bookings</Link>
-                    <Link to="/profile" style={styles.navLink}>👤 Profile</Link>
+                    <Link to="/stations" style={styles.navLink}>Stations</Link>
+                    <Link to="/bookings" style={styles.navLink}>Bookings</Link>
+                    <Link to="/profile" style={styles.navLink}>Profile</Link>
                     <span style={styles.name}>Hi, {user.name}!</span>
                     <button onClick={handleLogout} style={styles.logoutBtn}>
                     Logout
@@ -87,10 +87,10 @@ function Navbar() {
                 </div>
             </nav>
 
-            {/* Admin Users Panel — Navbar ke neeche slide karta hai */}
+            {/* Admin Users Panel - displays below navbar when open */}
             {showUsers && user?.role === 'ROLE_ADMIN' && (
                 <div style={styles.panel}>
-                    <h3 style={styles.panelTitle}>👥 Registered Users</h3>
+                    <h3 style={styles.panelTitle}>Registered Users</h3>
 
                     {message && (
                         <p style={message.includes('✅') ? styles.success : styles.error}>
@@ -123,7 +123,7 @@ function Navbar() {
                                                     ? styles.badgeAdmin
                                                     : styles.badgeUser
                                             }>
-                                                {u.role === 'ROLE_ADMIN' ? '🛡️ Admin' : '👤 User'}
+                                                {u.role === 'ROLE_ADMIN' ? 'Admin' : 'User'}
                                             </span>
                                         </td>
                                         <td style={styles.td}>
@@ -132,11 +132,11 @@ function Navbar() {
                                                     style={styles.deleteBtn}
                                                     onClick={() => deleteUser(u.id, u.name)}
                                                 >
-                                                    🗑️ Delete
+                                                    Delete
                                                 </button>
                                             ) : (
                                                 <span style={styles.protectedText}>
-                                                    🔒 Protected
+                                                    Protected
                                                 </span>
                                             )}
                                         </td>

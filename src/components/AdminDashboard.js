@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import ReviewsTable from '../components/ReviewsTable';
 import API from '../api/axios';
 
 function AdminDashboard() {
@@ -56,26 +57,26 @@ function AdminDashboard() {
                 availableChargers: parseInt(stationForm.availableChargers),
                 pricePerUnit: parseFloat(stationForm.pricePerUnit),
             });
-            setMessage('✅ station added!');
+            setMessage('Station added successfully!');
             setShowAddStation(false);
             fetchStations();
             fetchStats();
         } catch (err) {
-            setMessage('❌ Station not Added!');
+            setMessage('Failed to add station. Please try again.');
         } finally {
             setLoading(false);
         }
     };
 
     const deleteStation = async (id, name) => {
-        if (!window.confirm(`"${name}" want to delete?`)) return;
+        if (!window.confirm(`Are you sure you want to delete "${name}"?`)) return;
         try {
             await API.delete(`/admin/stations/${id}`);
-            setMessage('✅ Station Deleted!');
+            setMessage('Station deleted successfully!');
             fetchStations();
             fetchStats();
         } catch (err) {
-            setMessage('❌ Not Delete !');
+            setMessage('Failed to delete station. Please try again.');
         }
     };
 
@@ -95,7 +96,7 @@ function AdminDashboard() {
             {/* Header */}
             <div style={styles.header}>
                 <div>
-                    <h1 style={styles.headerTitle}>🛡️ Admin Dashboard</h1>
+                    <h1 style={styles.headerTitle}>Admin Dashboard</h1>
                     <p style={styles.headerSub}>Welcome, {user?.name}!</p>
                 </div>
             </div>
@@ -132,9 +133,10 @@ function AdminDashboard() {
             {/* Tabs */}
             <div style={styles.tabs}>
                 {[
-                    { key: 'overview', label: '📊 Overview' },
-                    { key: 'bookings', label: '📅 All Bookings' },
-                    { key: 'stations', label: '📍 Manage Stations' },
+                { key: 'overview', label: 'Overview' },
+                { key: 'bookings', label: 'All Bookings' },
+                { key: 'stations', label: 'Manage Stations' },
+                { key: 'reviews', label: '⭐ Reviews' },
                 ].map(tab => (
                     <button
                         key={tab.key}
@@ -151,7 +153,7 @@ function AdminDashboard() {
                 {/* Overview Tab */}
                 {activeTab === 'overview' && (
                     <div>
-                        <h2 style={styles.sectionTitle}>📊 Recent Bookings</h2>
+                        <h2 style={styles.sectionTitle}>Recent Bookings</h2>
                         <div style={styles.tableWrapper}>
                             <table style={styles.table}>
                                 <thead>
@@ -205,7 +207,7 @@ function AdminDashboard() {
                     <div>
                         <div style={styles.tabHeader}>
                             <h2 style={styles.sectionTitle}>
-                                📅 All Bookings ({bookings.length})
+                                All Bookings ({bookings.length})
                             </h2>
                         </div>
 
@@ -271,13 +273,13 @@ function AdminDashboard() {
                     <div>
                         <div style={styles.tabHeader}>
                             <h2 style={styles.sectionTitle}>
-                                📍 Stations ({stations.length})
+                                Stations ({stations.length})
                             </h2>
                             <button
                                 style={styles.addBtn}
                                 onClick={() => setShowAddStation(!showAddStation)}
                             >
-                                {showAddStation ? '✕ Cancel' : '+ Add Station'}
+                                {showAddStation ? 'Cancel' : '+ Add Station'}
                             </button>
                         </div>
 
@@ -285,7 +287,7 @@ function AdminDashboard() {
                         {showAddStation && (
                             <form onSubmit={handleAddStation} style={styles.addForm}>
                                 <h3 style={{ color: '#2d6a4f', marginBottom: '1rem' }}>
-                                    ➕ New Station Details
+                                    New Station Details
                                 </h3>
                                 <div style={styles.formGrid}>
                                     {[
@@ -365,6 +367,24 @@ function AdminDashboard() {
                         </div>
                     </div>
                 )}
+
+                {/* Reviews Tab */}
+{activeTab === 'reviews' && (
+    <div>
+        <h2 style={styles.sectionTitle}>⭐ User Reviews</h2>
+
+        <div
+            style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                padding: '1.5rem',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            }}
+        >
+            <ReviewsTable />
+        </div>
+    </div>
+)}
             </div>
         </div>
     );

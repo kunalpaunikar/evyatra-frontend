@@ -29,12 +29,12 @@ function Register() {
     const validate = () => {
         const newErrors = {};
 
-        // Name
+        // Name validation
         if (!form.name.trim()) {
-            newErrors.name = 'Name is require';
+            newErrors.name = 'Name is required';
         }
 
-        // Email — sirf @gmail.com
+        // Email validation - Gmail only
         const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
         if (!form.email) {
             newErrors.email = 'Email is required';
@@ -42,7 +42,7 @@ function Register() {
             newErrors.email = 'Only @gmail.com email is allowed';
         }
 
-        // Password — 8-12 chars, include a number, a letter, and a special char
+        // Password validation - 8-12 chars, at least one letter, one number, and one special character
         const passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@*_#$!])[A-Za-z\d@*_#$!]{8,12}$/;
 
         if (!form.password) {
@@ -51,7 +51,7 @@ function Register() {
             newErrors.password = 'Password must be 8-12 chars and include a number, a letter, and a special character (@*_#$!)';
         }
 
-        // Phone — 10 digits only
+        // Phone validation - 10 digits only, must start with 6-9
         const phoneRegex = /^[6-9]\d{9}$/;
         if (!form.phone) {
             newErrors.phone = 'Phone is required';

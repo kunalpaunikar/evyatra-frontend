@@ -266,7 +266,7 @@ function Stations() {
             setStations(res.data);
             setFilteredStations(res.data);
         } catch (err) {
-            console.error('Stations load nahi hue!');
+            console.error('Failed to load stations');
         } finally {
             setLoading(false);
         }
@@ -289,9 +289,9 @@ function Stations() {
             setLocationLoading(false);
         },
         {
-            enableHighAccuracy: true,  // GPS use karo
-            timeout: 10000,            // 10 sec wait
-            maximumAge: 0,             // Cache mat use karo — fresh location lo
+            enableHighAccuracy: true,  // Use GPS for precise location
+            timeout: 10000,            // Wait up to 10 seconds
+            maximumAge: 0,             // Don't use cached location
         }
         );
     };
@@ -469,7 +469,7 @@ function Stations() {
                     <div style={styles.searchInputWrapper}>
                         <input
                             type="text"
-                            placeholder="🔍 City or state daalo... (Pune, Maharashtra, Delhi)"
+                            placeholder="Search by city or state (Pune, Maharashtra, Delhi)"
                             value={searchCity}
                             onChange={(e) => setSearchCity(e.target.value)}
                             onKeyPress={(e) => e.key === 'Enter' && handleSearch()}

@@ -23,14 +23,14 @@ function ForgotPassword() {
 
         const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
         if (!emailRegex.test(email)) {
-            setError('Only @gmail.com email is allowed !');
+            setError('Please use a valid Gmail address.');
             return;
         }
 
         setLoading(true);
         try {
             await API.post('/auth/forgot-password', { email });
-            setMessage('✅ OTP has been sent — please check your email!');
+            setMessage('OTP has been sent to your email. Please check your inbox.');
             setStep(2);
         } catch (err) {
             setError(err.response?.data?.message || 'Not Found Email !');
@@ -45,17 +45,17 @@ function ForgotPassword() {
         setError('');
 
         if (otp.length !== 6) {
-            setError('Enter 6 digit OTP !');
+            setError('Please enter a 6-digit OTP.');
             return;
         }
 
         setLoading(true);
         try {
             await API.post('/auth/verify-otp', { email, otp });
-            setMessage('✅ OTP verified! Enter New Password Now ! ');
+            setMessage('OTP verified successfully. Now enter your new password.');
             setStep(3);
         } catch (err) {
-            setError(err.response?.data?.message || 'OTP is Wrong ! ');
+            setError(err.response?.data?.message || 'OTP verification failed. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -68,19 +68,19 @@ function ForgotPassword() {
 
         const passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,12}$/;
         if (!passRegex.test(newPassword)) {
-            setError('Password should be 8-12 chars, 1 digit and atleast 1 Special Character !');
+            setError('Password must be 8-12 characters with at least one number and one special character.');
             return;
         }
 
         if (newPassword !== confirmPassword) {
-            setError('Both passwords do not match !');
+            setError('Passwords do not match. Please try again.');
             return;
         }
 
         setLoading(true);
         try {
             await API.post('/auth/reset-password', { email, otp, newPassword });
-            setMessage('✅ Password is reset ! Now login ');
+            setMessage('Password has been reset successfully. You can now login with your new password.');
             setStep(4);
         } catch (err) {
             setError(err.response?.data?.message || 'Reset failed!');
@@ -104,7 +104,7 @@ function ForgotPassword() {
                                 backgroundColor: step > i + 1
                                     ? '#2d6a4f'
                                     : step === i + 1
-                                        ? '#40916c'
+                                        ? '#010604'
                                         : '#ccc'
                             }}>
                                 {step > i + 1 ? '✓' : i + 1}
@@ -136,7 +136,7 @@ function ForgotPassword() {
                             style={styles.button}
                             disabled={loading}
                         >
-                            {loading ? 'Sending OTP...' : '📧 Send OTP'}
+                            {loading ? 'Sending OTP...' : 'Send OTP'}
                         </button>
                     </form>
                 )}
@@ -164,14 +164,14 @@ function ForgotPassword() {
                             style={styles.button}
                             disabled={loading}
                         >
-                            {loading ? 'Verifying...' : '✅ Verify OTP'}
+                            {loading ? 'Verifying...' : 'Verify OTP'}
                         </button>
                         <button
                             type="button"
                             style={styles.resendBtn}
                             onClick={handleSendOtp}
                         >
-                            🔄 Resend OTP
+                            Resend OTP
                         </button>
                     </form>
                 )}
@@ -197,7 +197,7 @@ function ForgotPassword() {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 style={styles.input}
-                                placeholder="Dobara daalo"
+                                placeholder="Enter password again"
                                 required
                             />
                         </div>
@@ -206,7 +206,7 @@ function ForgotPassword() {
                             style={styles.button}
                             disabled={loading}
                         >
-                            {loading ? 'Resetting...' : '🔐 Reset Password'}
+                            {loading ? 'Resetting...' : 'Reset Password'}
                         </button>
                     </form>
                 )}
@@ -224,7 +224,7 @@ function ForgotPassword() {
 
                 {step < 4 && (
                     <p style={styles.backLink}>
-                        <Link to="/login">← Go back to Login</Link>
+                        <Link to="/login">Back to Login</Link>
                     </p>
                 )}
             </div>

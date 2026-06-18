@@ -11,19 +11,19 @@ export const AuthProvider = ({ children }) => {
         return token ? { token, name, role } : null;
     });
 
-    // Token expiry check — In every 1 minute
+    // Check token expiry - runs every 1 minute
     useEffect(() => {
         const checkExpiry = () => {
             const token = localStorage.getItem('token');
             if (!token) return;
 
             try {
-                // JWT payload decode karo
+                // Decode JWT payload
                 const payload = JSON.parse(atob(token.split('.')[1]));
-                const expiry = payload.exp * 1000; // milliseconds
+                const expiry = payload.exp * 1000; // convert to milliseconds
 
                 if (Date.now() > expiry) {
-                    // Token has expire — logout now
+                    // Token has expired - logout now
                     logout();
                 }
             } catch (e) {
@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }) => {
             }
         };
 
-        checkExpiry(); // Page load pe check karo
-        const interval = setInterval(checkExpiry, 60000); // Har minute
+        checkExpiry(); // Check on page load
+        const interval = setInterval(checkExpiry, 60000); // Check every minute
         return () => clearInterval(interval);
     }, []);
 
