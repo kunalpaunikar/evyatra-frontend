@@ -14,6 +14,19 @@
 - React Router DOM
 - QRCode.react
 
+## ✨ Features
+
+- 🔐 JWT Authentication (Login/Register/Forgot Password)
+- 🗺️ Interactive Map with Leaflet (Street/Satellite/Terrain/Dark views)
+- 📍 GPS Location + Nearby Stations + Live Routing
+- 🔋 Booking Flow — Slot Selection, Date/Time, Payment
+- 💳 Payment Gateway UI — UPI QR Code, Card, NetBanking, Wallet
+- ⭐ Reviews & Ratings — Star rating system for stations
+- 🤖 AI Chatbot — EVyatra Assistant (Powered by Gemini)
+- 📱 Fully Responsive Design
+- 🛡️ Admin Dashboard — Users, Stations, Bookings, Reviews
+
+
 ## ⚙️ Setup Locally
 
 ```bash
