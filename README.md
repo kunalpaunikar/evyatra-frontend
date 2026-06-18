@@ -5,7 +5,7 @@
 ![Vercel](https://img.shields.io/badge/Deploy-Vercel-black)
 
 ## 🌐 Live Demo
-[evyatra.vercel.app](https://evyatra.vercel.app)
+- [evyatra.vercel.app](https://evyatra-frontend.vercel.app)
 
 ## 🛠️ Tech Stack
 - React.js
